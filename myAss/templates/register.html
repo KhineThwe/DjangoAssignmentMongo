@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    {% load static %}
+    <!-- CSS CUSTOM -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+  <div class="login-box">
+  <h2>User Information</h2>
+  <form action="add/" id = "form-id" method="POST">
+       {% csrf_token %}
+    <div class="user-box">
+      <input type="text" name="name" required="">
+      <label>Username</label>
+    </div>
+    <div class="user-box">
+      <input type="text" name="password" required="">
+      <label>Password</label>
+    </div>
+    <div class="user-box">
+      <input type="text" name="amount" required="">
+      <label>Amount</label>
+    </div>
+{#    <div class="user-box">#}
+{#      <input type="submit" value="Submit">#}
+{#    </div>#}
+    <a href="#" onclick="document.forms['form-id'].submit();">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+          Submit
+    </a>
+  </form>
+</div>
+</body>
+</html>

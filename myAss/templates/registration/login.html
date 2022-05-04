@@ -1,0 +1,9 @@
+{% extends 'home.html' %}
+{% block content %}
+         <h1>Please login</h1>
+         <form action="loginInfo/" id="form-id" method="POST">
+             {% csrf_token %}
+             {{ form.as_p }}
+    <a href="#" onclick="document.forms['form-id'].submit();">Login</a>
+{% endblock %}
+         </form>

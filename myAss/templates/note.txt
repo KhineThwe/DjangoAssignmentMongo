@@ -1,0 +1,2 @@
+1.register.htmlနဲ့က result.htmlတစ်တွဲ form action post နဲ့လုပ်ထားတာကို result page မှာ ပြန်ပြတာ db မပါဘူး
+2.db.html က for mongodb ထဲက data ဆွဲထုတ်တာ
