@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Login Page</title>
+    {% load static %}
+    <!-- CSS CUSTOM -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
+<div class="login-box">
 <form action="loginInfo/" method="POST" id="form-id">
      {% csrf_token %}
-  <div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="upass" required>
-
-     <a href="#" onclick="document.forms['form-id'].submit();">Login</a>
+  <div class="user-box">
+      <input type="text" name="uname" required="" required>
+      <label>Username</label>
   </div>
+  <div class="user-box">
+      <input type="password" name="upass" required>
+      <label>Password</label>
+  </div>
+{#  <div class="user-box">#}
+{#    <label for="uname"><b>Username</b></label>#}
+{#    <input type="text" placeholder="Enter Username" name="uname" required>#}
+{##}
+{#    <label for="psw"><b>Password</b></label>#}
+{#    <input type="password" placeholder="Enter Password" name="upass" required>#}
+{##}
+{#     <a href="#" onclick="document.forms['form-id'].submit();">Login</a>#}
+{#  </div>#}
+    <a href="#" onclick="document.forms['form-id'].submit();">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+          Login
+    </a>
 </form>
-
+</div>
 </body>
 </html>

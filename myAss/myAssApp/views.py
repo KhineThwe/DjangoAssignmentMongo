@@ -2,6 +2,7 @@ from django.contrib.auth import logout
 from django.core.checks import messages
 from django.shortcuts import render,redirect
 import pymongo
+import random
 
 connection = pymongo.MongoClient("localhost", 27017)
 database = connection["myTestDB"]
@@ -14,59 +15,60 @@ def home(request):
 
 def add(request):
 	try:
+		randomNo = random.randint(100,900)
+		rId = randomNo
 		rname = request.POST['name']
 		rpass = request.POST['password']
 		ramount = request.POST['amount']
-		data = {"username": rname, "password": rpass, "amount": ramount}
+		data = {"_id":rId,"username": rname, "password": rpass, "amount": ramount}
 		collection.insert_one(data)
-		return render(request, 'result.html', {"name": rname, "passcode": rpass, "amount": ramount})
+		return render(request, 'result.html', {"id":rId,"name": rname, "passcode": rpass, "amount": ramount})
 	except Exception as err:
 		return render(request,'result.html',{"error":err})
 
-# def login(request):
-# 	query = {"username": "khine", "password": "123"}
-# 	result = collection.find(query)
-# 	for i in result:
-# 		idNo = i.get("_id")
-# 		username = i.get("username")
-# 		password = i.get("password")
-# 		amount = i.get("amount")
-# 	return render(request, 'home.html', {"name": username, "passcode": password, "amount": amount})
 def login(request):
 	return render(request, 'login.html')
 
 def registerroute(request):
 	return render(request, 'register.html')
 
-# def resultroute(request):
-# 	query = collection.find_one()
-# 	return render(request, 'result.html', {"name": query.get("username"), "passcode": query.get("password"), "amount": query.get("amount")})
-#
 def logout_request(request):
-	logout(request)
-	messages.info(request, "Logged out successfully!")
-	return redirect("")
+	return redirect("/")
 
 def loginInfo(request):
 	try:
 		lname = request.POST['uname']
 		lpass = request.POST['upass']
-		result = collection.find({}, {"username": lname, "password": lpass})
-		# if result.get("username") == lname a
-		for i in result.items():
-			print(i)
-		if result:
-			return render(request, 'lresult.html', {"name": result.get("username"), "passcode": result.get("password"),
-			                                        "amount": result.get("amount")})
-		else:
-			return render(request, 'login.html')
+		query={"username":lname,"password":lpass}
+		result = collection.find_one(query)
+		name,password,amount = result.get("username"),result.get("password"),result.get("amount")
+		return render(request,'lresult.html' ,{"name": name,"passcode": password,"amount": amount})
 	except Exception as err:
-		print(err)
-		
+		return render(request,{"err":err})
 		
 def backTohomePageroute(request):
     message = "Register successful!!!"
     return render(request, 'home.html',{"message":message})
-	
-	
-		
+
+def retrieve(request):
+	result = collection.find()
+	return render(request ,'retrieve.html' ,{"details": result})
+
+def edit(request,id):
+	query = {"_id": id}
+	object = collection.find_one(query)
+	return render(request ,'edit.html' ,{"object": query})
+
+def update(request,id):
+	# object = Details.objects.get(id=id)
+	# form = detailsForm(request.POST,instance = object)
+	# if form.is_valid():
+	# 	form.save()
+	# 	object=Details.objects.all()
+	# 	return redirect('retrieve')
+	pass
+
+def delete(request,id):
+	# Details.objects.filter(id=id).delete()
+	# return redirect('retrieve')
+	pass

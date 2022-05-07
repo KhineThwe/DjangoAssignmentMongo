@@ -11,5 +11,9 @@ urlpatterns = [
     path('registerroute/',views.registerroute,name='registerroute'),
     path('login/loginInfo/',views.loginInfo,name = 'loginInfo'),
     path('logout/',views.logout_request,name='logout'),
-    path('registerroute/add/backTohomePageroute/',views.backTohomePageroute,name='backTohomePageroute')
+    path('registerroute/add/backTohomePageroute/',views.backTohomePageroute,name='backTohomePageroute'),
+    path('retrieve',views.retrieve,name='retrieve'),
+    path('edit/<int:id>',views.edit,name='edit'),
+    path('update/<int:id>',views.update,name='update'),
+    path('delete/<int:id>',views.delete,name='delete')
 ]

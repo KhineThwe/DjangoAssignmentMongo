@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Register</title>
+    <title>Update</title>
     {% load static %}
     <!-- CSS CUSTOM -->
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -10,18 +10,18 @@
 <body>
   <div class="login-box">
   <h2>User Information</h2>
-  <form action="add/" id = "form-id" method="POST">
+  <form action="/update/{{object.id}}" id = "form-id" method="POST">
        {% csrf_token %}
     <div class="user-box">
-      <input type="text" name="name" required="">
+      <input type="text" name="name" required="" value="{{ object.username }}">
       <label>Username</label>
     </div>
     <div class="user-box">
-      <input type="text" name="password" required="">
+      <input type="text" name="password" required="" value="{{ object.password }}">
       <label>Password</label>
     </div>
     <div class="user-box">
-      <input type="text" name="amount" required="">
+      <input type="text" name="amount" required="" value="{{ object.amount }}">
       <label>Amount</label>
     </div>
     <a href="#" onclick="document.forms['form-id'].submit();">
@@ -29,7 +29,7 @@
       <span></span>
       <span></span>
       <span></span>
-          Submit
+          Update
     </a>
   </form>
 </div>
